@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101d35">
+  <meta name="description" content="Phonetics — find your next pre-owned phone at a price you'll love.">
+  <title>Phonetics — Find your next phone. Love the price.</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="announcement">A smarter way to buy pre-owned phones <span>•</span> Built around trust</div>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="Phonetics home">
+      <span class="brand-mark" aria-hidden="true">P<span>.</span></span>
+      <span class="brand-copy"><strong>phonetics</strong><small>PRE-OWNED. RE-LOVED.</small></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+    <nav id="mainNav" class="main-nav" aria-label="Main navigation">
+      <a href="#phones">Explore phones</a><a href="#how-it-works">How it works</a><a href="#trust">Our promise</a>
+      <a class="nav-cta" href="#sell">Sell your phone <span>↗</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> THE BETTER WAY TO UPGRADE</div>
+        <h1>Find your next phone.<br><em>Love the price.</em></h1>
+        <p class="hero-text">Great phones deserve a second life. Discover a more thoughtful way to buy and sell pre-owned smartphones.</p>
+        <div class="hero-actions">
+          <a class="button button-gold" href="#phones">Explore phones <span>→</span></a>
+          <a class="button button-outline" href="#sell">Sell your phone</a>
+        </div>
+        <div class="hero-note"><span class="shield">✓</span> Reviewed listings. Clear details. No seller-to-buyer contact.</div>
+      </div>
+      <div class="hero-art" aria-label="Illustration of a premium smartphone">
+        <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+        <div class="phone-device">
+          <div class="phone-side"></div><div class="phone-screen">
+            <div class="screen-camera"></div><div class="screen-glow"></div>
+            <div class="screen-label">A BETTER<br><b>SECOND LIFE.</b></div>
+            <div class="screen-bottom"><span>PHONETICS</span><span>01 / 01</span></div>
+          </div>
+        </div>
+        <div class="float-card"><span class="float-icon">✦</span><span><b>Thoughtfully reviewed</b><small>Trust comes first</small></span></div>
+        <div class="art-caption">GOOD TECH.<br><span>SMARTER CHOICES.</span></div>
+      </div>
+    </section>
+
+    <section class="search-strip" aria-label="Search phones">
+      <div><span class="search-kicker">YOUR NEXT UPGRADE</span><strong>Find a phone that fits you.</strong></div>
+      <form class="search-form" id="searchForm" role="search">
+        <span aria-hidden="true">⌕</span><input id="phoneSearch" type="search" placeholder="Search brand or model" aria-label="Search brand or model">
+        <button type="submit">Search <span>→</span></button>
+      </form>
+    </section>
+
+    <section class="section inventory-section" id="phones">
+      <div class="section-heading">
+        <div><div class="eyebrow">CURATED FOR YOU</div><h2>Available <em>phones</em></h2></div>
+        <span class="section-count">LIVE INVENTORY</span>
+      </div>
+      <div class="inventory-state" id="inventoryState">
+        <div class="empty-icon">⌕</div>
+        <h3>Good phones are worth waiting for.</h3>
+        <p>There are no approved phones listed right now. We’ll show a phone here only after Phonetics reviews and approves its listing.</p>
+        <a href="#sell" class="text-link">Have a phone to sell? Start here <span>→</span></a>
+      </div>
+      <p class="search-feedback" id="searchFeedback" aria-live="polite"></p>
+    </section>
+
+    <section class="sell-band" id="sell">
+      <div class="sell-copy">
+        <div class="eyebrow eyebrow-light">READY FOR YOUR NEXT UPGRADE?</div>
+        <h2>Your old phone<br>could be <em>someone’s next.</em></h2>
+        <p>Tell us about your phone. Our team reviews every submission and decides whether it can be listed.</p>
+        <div class="sell-benefits"><span>✓ Human review</span><span>✓ Proof required</span><span>✓ You stay private</span></div>
+      </div>
+      <div class="form-card">
+        <div class="form-title"><div><span class="form-step">SELLER SUBMISSION</span><h3>Tell us about your phone</h3></div><span class="form-number">01—02</span></div>
+        <div class="notice notice-warning"><strong>Preview only:</strong> secure database and private file storage are not connected yet. This form will not send or save your information.</div>
+        <form id="sellerForm" novalidate>
+          <div class="field-grid">
+            <label>Full name<input name="seller_name" autocomplete="name" required maxlength="100" placeholder="Your name"></label>
+            <label>Mobile number<input name="seller_mobile" type="tel" inputmode="tel" autocomplete="tel" required pattern="[0-9+() -]{10,18}" placeholder="10-digit mobile number"></label>
+            <label>City<input name="seller_city" autocomplete="address-level2" required maxlength="80" placeholder="Your city"></label>
+            <label>Brand & model<input name="phone_model" required maxlength="120" placeholder="e.g. Samsung Galaxy S series"></label>
+            <label>Condition<select name="phone_condition" required><option value="">Choose condition</option><option>Like new</option><option>Excellent</option><option>Good</option><option>Fair</option></select></label>
+            <label>RAM & storage<input name="phone_storage" required maxlength="60" placeholder="e.g. 8 GB RAM / 128 GB"></label>
+            <label>Asking price (₹)<input name="asking_price" type="number" inputmode="numeric" min="1" max="1000000" required placeholder="Your expected price"></label>
+            <label>Purchase bill / accepted proof<select name="proof_available" required><option value="">Choose one</option><option value="yes">Yes, proof is available</option><option value="no">No proof available</option></select></label>
+          </div>
+          <label>Phone photos <input name="phone_photos" type="file" accept="image/jpeg,image/png,image/webp" multiple><small>JPG, PNG or WebP only. Upload is disabled until secure storage is connected.</small></label>
+          <label>Additional notes <textarea name="phone_notes" rows="3" maxlength="1000" placeholder="Mention repairs, accessories or any known issue"></textarea></label>
+          <label class="check-label"><input type="checkbox" required> I confirm the details are accurate and I can provide genuine purchase proof accepted by Phonetics.</label>
+          <button class="button button-dark full-width" type="submit">Check submission requirements <span>→</span></button>
+          <p class="form-result" id="sellerResult" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="section how-section" id="how-it-works">
+      <div class="section-heading"><div><div class="eyebrow">SIMPLE BY DESIGN</div><h2>Good phones. <em>Good process.</em></h2></div></div>
+      <div class="steps-grid">
+        <article class="step-card"><span class="step-index">01</span><div class="step-icon">↗</div><h3>Seller submits</h3><p>Share the phone details, expected price and genuine purchase proof.</p></article>
+        <article class="step-card"><span class="step-index">02</span><div class="step-icon">⌕</div><h3>Phonetics reviews</h3><p>We review the details and proof before deciding whether to approve a listing.</p></article>
+        <article class="step-card"><span class="step-index">03</span><div class="step-icon">₹</div><h3>We set the price</h3><p>Approved listings show the Phonetics selling price, not the seller’s asking price.</p></article>
+        <article class="step-card"><span class="step-index">04</span><div class="step-icon">✓</div><h3>Buyer requests</h3><p>Buyers submit a request through Phonetics. A request is not a completed purchase.</p></article>
+      </div>
+    </section>
+
+    <section class="trust-section" id="trust">
+      <div class="trust-inner">
+        <div><div class="eyebrow eyebrow-light">THE PHONETICS PROMISE</div><h2>Trust isn’t a feature.<br><em>It’s the foundation.</em></h2></div>
+        <div class="trust-points">
+          <div><span>01</span><p><b>Privacy by design</b><small>Seller contact details, asking price and proof documents are private.</small></p></div>
+          <div><span>02</span><p><b>Reviewed, not assumed</b><small>Only listings approved by Phonetics should appear publicly.</small></p></div>
+          <div><span>03</span><p><b>No false promises</b><small>A purchase request is only a request—not a confirmed sale.</small></p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="buyer-section section" id="buy">
+      <div class="buyer-box"><div><div class="eyebrow">BUY WITH CONFIDENCE</div><h2>Found your match?</h2><p>Once approved phones are available, you’ll be able to request a purchase through Phonetics.</p></div><button class="button button-gold" type="button" id="buyerInfoButton">Purchase request <span>→</span></button></div>
+      <p class="buyer-feedback" id="buyerFeedback" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="#home"><span class="brand-mark">P<span>.</span></span><span class="brand-copy"><strong>phonetics</strong><small>PRE-OWNED. RE-LOVED.</small></span></a>
+    <p>Find your next phone. Love the price.</p>
+    <div class="footer-bottom"><span>© <span id="year"></span> Phonetics</span><span>Thoughtful tech. More trust.</span><a href="#trust">Privacy & trust ↑</a></div>
+  </footer>
+</body>
+</html>
