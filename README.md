@@ -1,50 +1,46 @@
-# Phonetics — Frontend Phase 1
+# Phonetics — production-hardening candidate
 
-**Tagline:** Find your next phone. Love the price.
+**Find your next phone. Love the price.**
 
-This ZIP contains the first frontend prototype for the Phonetics pre-owned smartphone marketplace.
+Responsive marketplace starter with a premium navy/white/gold storefront, searchable phone catalogue, seller submission form, buyer enquiry form, and an initial private admin console.
+
+## Honest status
+
+This ZIP is **not yet safe to call production-ready**. Your current Supabase table columns, relationships, RLS policies, bucket settings, and email templates were not independently verified at generation time. The included backend functions use a documented schema contract and must be reconciled with the existing schema before deployment. The admin review function marks review status but deliberately does not publish a listing automatically until the `phone_listings` schema and approved-photo workflow are verified.
 
 ## Files
-- `index.html` — website structure and page content
-- `style.css` — responsive navy, white and gold styling
-- `script.js` — mobile menu, empty-inventory search feedback and form validation
-- `README.md` — setup and status notes
-- `.nojekyll` — helps GitHub Pages serve static files directly
+- `index.html`, `styles.css`, `app.js`: storefront
+- `admin.html`, `admin.js`: admin sign-in and pending submission console
+- `config.js`: browser-safe project config only
+- `supabase/functions/`: Edge Function starter code
+- `supabase/verification/`: read-only schema inspection and release gate
 
-## Important status: FRONTEND ONLY / BACKEND NOT CONNECTED
-- No real listings are included. Inventory shows an honest empty state.
-- Seller form does not send or save data.
-- Buyer purchase requests are not enabled.
-- Admin authentication/dashboard is not implemented in this frontend.
-- There is no database or file upload connection yet.
-- EmailJS settings have not been integrated or tested.
-- Do not collect real customer information with this prototype.
-- Do not store bills or private seller details in this public repository.
+## Existing resources
+- Existing repository: `https://github.com/govindsen8103859-gif/phonetics-official`
+- Expected Pages address: `https://govindsen8103859-gif.github.io/phonetics-official/`
+- Supabase project URL and publishable key were carried forward from the owner-provided project information. Verify them in Supabase before deployment.
 
-## Upload from Android to the existing repository
-1. Download and extract the ZIP on your phone, if your file manager supports ZIP extraction.
-2. Open the existing repository: https://github.com/govindsen8103859-gif/phonetics-official
-3. Choose **Add file → Upload files**. Upload `index.html`, `style.css`, `script.js`, and `.nojekyll` to the repository root. You may replace the existing `README.md` with this README after checking it. Commit the changes to `main`.
+## Android deployment outline
+1. Extract this ZIP.
+2. Upload the extracted files and folders to the root of your existing `phonetics-official` GitHub repository. Do not create another repo.
+3. Commit changes and verify GitHub Pages deployment.
+4. Run `supabase/verification/inspect_existing_schema.sql` in Supabase SQL Editor.
+5. Read `supabase/verification/production-readiness.md` and reconcile the schema contract before deploying Edge Functions.
+6. Set Edge Function secrets in Supabase server-side settings. Never paste the service-role key into GitHub, `config.js`, or browser JavaScript.
+7. Deploy the functions using Supabase CLI or the Supabase dashboard if supported for your project.
+8. Test with dummy data and unauthorized sessions before any real use.
 
-Keep all files in the root folder. `index.html` must not be inside a nested folder.
+## Edge Function names
+- `submit-seller`
+- `submit-buyer`
+- `admin-list-submissions`
+- `admin-review-submission`
 
-## GitHub Pages setup
-In the repository, open **Settings → Pages**. Under **Build and deployment**, select **Deploy from a branch**, choose branch `main`, choose folder `/(root)`, and save. GitHub documents these steps here:
-https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
-
-The expected address is:
-https://govindsen8103859-gif.github.io/phonetics-official/
-
-That URL is not confirmed live by this package. After upload, check the Pages status and open **Visit site** to verify deployment.
-
-## Next phases before real use
-1. Choose and configure a free backend (Supabase or Firebase) after checking current free-tier limits.
-2. Implement server-enforced access control, private storage for proof documents, safe image validation, and real admin authentication.
-3. Connect seller and buyer forms to the database and add admin notifications.
-4. Verify actual EmailJS template variables and recipients before integration.
-5. Test the full seller-review-approval-buyer-request workflow before accepting real customer data.
-
-## Test notes
-- File references in this package are relative and point to included files.
-- HTML and JavaScript were reviewed for basic consistency in this generation environment.
-- This is not a substitute for browser/device testing. Real Android layout, upload, deployment and backend workflow are **UNTESTED** until you upload and verify them.
+## Security notes
+- A public/publishable key is not a secret, but it does not make database policies secure.
+- `SUPABASE_SERVICE_ROLE_KEY` must exist only in server-side Edge Function secrets.
+- Admin access checks `auth.uid()` against `admin_users.user_id`; adapt this to the actual UUID column.
+- `public_phone_listings` must be a safe public view. Do not point the public site directly at a private table with `select(*)`.
+- Seller uploads are held in private `seller-proofs` until a reviewed promotion workflow is implemented.
+- No email notifications are implemented/enabled here. Configure and test them separately.
+- Add rate limiting and bot protection before public launch.
